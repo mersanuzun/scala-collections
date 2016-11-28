@@ -65,27 +65,15 @@ class TestLinkedList extends Specification{
       list.contains("Erkan") mustEqual false
     }
 
-    "remove fist element" in {
-      val list: LinkedList[String] = LinkedList("Mehmet", "Ersan", "Uzun")
-      list.removeFist() mustEqual LinkedList("Ersan", "Uzun")
-    }
-
-    "remove the first 2 elements from list" in {
-      val list: LinkedList[String] = LinkedList("Mehmet", "Ersan", "Uzun")
-      list.drop(2) mustEqual LinkedList("Uzun")
-    }
-
-    "dropWhile" in {
-      val list: LinkedList[Int] = LinkedList(1,2,3,4,5,6)
-      list.dropWhile(_ % 2 == 0) mustEqual LinkedList(1,3,5)
-    }
 
     "adding 1000000 elements" in {
       var list: LinkedList[Int] = LinkedList()
       for(i <- 1 to 1000000){
         list = list.add(i)
       }
+      list.remove(50000)
       "added" equals "added"
     }
+
   }
 }

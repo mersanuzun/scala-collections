@@ -58,7 +58,7 @@ class TestBinarySearchTree extends Specification{
       bst.root.rightChild.rightChild.value mustEqual 7
     }
 
-    "return true invoking contains with an element that is not added before" in {
+    "return true invoking contains methods with an element that is added before" in {
       val bst: BinarySearchTree[Int] = new BinarySearchTree[Int]
       bst.add(1)
       bst.add(0)
@@ -80,7 +80,7 @@ class TestBinarySearchTree extends Specification{
     "adding 100000 elements" in {
       val rnd = scala.util.Random
       val bst: BinarySearchTree[Int] = new BinarySearchTree[Int]
-      for(i <- 1 to 10000000){
+      for(i <- 1 to 1000000){
         bst.add(rnd.nextInt(10000))
       }
       "added" equals "added"

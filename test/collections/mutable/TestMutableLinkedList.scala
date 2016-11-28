@@ -11,7 +11,6 @@ class TestMutableLinkedList extends Specification{
       val list: LinkedList[Int] = new LinkedList[Int]
       list.addLast(2)
       list.addLast(1)
-      println(list)
       list.firstNode.value mustEqual 2
       list.firstNode.next.value mustEqual(1)
     }

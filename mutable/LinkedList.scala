@@ -19,8 +19,9 @@ class LinkedList[T] {
     this
   }
 
-  def addFirst(data: T) = {
+  def addFirst(data: T): LinkedList[T] = {
     firstNode = NonEmptyNode(data, firstNode)
+    this
   }
 
   def remove(value: T): Boolean = {

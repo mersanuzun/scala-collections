@@ -5,7 +5,7 @@ import org.specs2.mutable._
   * Created by mersanuzun on 11/15/16.
   */
 class TestHashMap extends Specification{
-List
+
   "Mutable HashMap" should {
     "put data that its key is 1 to empty hashmap" in {
       val hashmap: HashMap[Int, String] = new HashMap[Int, String]

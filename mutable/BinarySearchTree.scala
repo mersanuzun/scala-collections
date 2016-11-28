@@ -10,7 +10,15 @@ class BinarySearchTree[T <% Ordered[T]] {
 
   def add(value: T): Unit = root = root.add(value)
 
-  def contains(value: T): Boolean = root.contains(value)
+  def contains(value: T): Boolean = {
+    var curr: Node = root
+    while(!curr.isEmpty){
+      if (value == curr.value) return true
+      else if (value < curr.value) curr = curr.leftChild
+      else curr = curr.rightChild
+    }
+    false
+  }
 
   def remove(value: T): Unit = root = root.remove(value)
 
@@ -21,7 +29,6 @@ class BinarySearchTree[T <% Ordered[T]] {
     def add(v: T): Node
     def remove(v: T): Node
     def isEmpty: Boolean
-    def contains(v: T): Boolean
   }
   case class NonEmptyNode(var value: T, var leftChild: Node, var rightChild: Node) extends Node {
     override def add(v: T): Node = {
@@ -32,11 +39,7 @@ class BinarySearchTree[T <% Ordered[T]] {
       }
     }
     override def isEmpty: Boolean = false
-    override def contains(v: T): Boolean = {
-      if (v == value) true
-      else if (v > value) rightChild.contains(v)
-      else leftChild.contains(v)
-    }
+
     override def remove(v: T): Node = {
       if (v < value){
         NonEmptyNode(value, leftChild.remove(v), rightChild)
@@ -66,7 +69,6 @@ class BinarySearchTree[T <% Ordered[T]] {
     override def toString: String = "-"
     override def add(v: T): Node = NonEmptyNode(v, EmptyNode, EmptyNode)
     override def isEmpty: Boolean = true
-    override def contains(v: T): Boolean = false
     override def remove(v: T): Node = EmptyNode
   }
 }

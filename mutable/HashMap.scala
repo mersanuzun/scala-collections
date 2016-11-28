@@ -17,7 +17,15 @@ class HashMap[K, V] {
     indexFor(h, bucket.length)
   }
 
-  def contains(key: K): Boolean = bucket(getIndex(key)).contains(key)
+  def contains(key: K): Boolean = {
+    val index: Int = getIndex(key)
+    var currNode: MapEntry = bucket(index)
+    while(!currNode.isEmpty){
+      if (currNode.key == key) return true
+      currNode = currNode.next
+    }
+    false
+  }
 
   private def indexFor(h: Int, length: Int): Int = h & length -1
 
@@ -62,19 +70,17 @@ class HashMap[K, V] {
     def key: K
     def value: V
     def next: MapEntry
-    def contains(k: K): Boolean
+    def isEmpty: Boolean
   }
   private[mutable] case class NonEmptyMapEntry(key: K, var value: V, var next: MapEntry) extends MapEntry {
-    override def contains(k: K): Boolean = {
-      if (key.equals(k)) true
-      else next.contains(k)
-    }
+    override def isEmpty: Boolean = false
   }
   private[mutable] object EmptyMapEntry extends MapEntry{
     override def key: K = throw new NoSuchElementException
     override def value: V = throw new NoSuchElementException
     override def next: MapEntry = throw new NoSuchElementException
-    override def contains(k: K): Boolean = false
     override def toString: String = "-"
+
+    override def isEmpty: Boolean = true
   }
 }
