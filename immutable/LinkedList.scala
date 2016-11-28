@@ -9,7 +9,14 @@ trait LinkedList[+T] {
   def head: T
   def tail: LinkedList[T]
   def isEmpty: Boolean
-  def contains[B >: T](value: B): Boolean
+  def contains[B >: T](value: B): Boolean = {
+    var currNode: LinkedList[B] = this
+    while(!currNode.isEmpty){
+      if (currNode.head == value) return true
+      currNode = currNode.tail
+    }
+    false
+  }
   def remove[B >: T](value: B): LinkedList[B]
   def removeFist(): LinkedList[T] = tail
   def drop(n: Int): LinkedList[T] = {
@@ -33,10 +40,6 @@ trait LinkedList[+T] {
 
 case class NonEmptyNode[T](override val head: T, override val tail: LinkedList[T]) extends LinkedList[T]{
   override def isEmpty: Boolean = false
-  override def contains[B >: T](value: B): Boolean = {
-    if (value == this.head) true
-    else tail.contains(value)
-  }
 
   override def remove[B >: T](value: B): LinkedList[B] = {
     if (value == this.head) tail
@@ -68,7 +71,6 @@ object EmptyNode extends LinkedList[Nothing] {
   override def isEmpty = true
   override def head = throw new NoSuchElementException
   override def tail = throw new NoSuchElementException
-  override def contains[B >: Nothing](value: B): Boolean = false
   override def remove[B >: Nothing](value: B): LinkedList[B] = EmptyNode
   override def add[B >: Nothing](value: B): LinkedList[B] = NonEmptyNode(value, EmptyNode)
   override def dropWhile(f: (Nothing) => Boolean): LinkedList[Nothing] = EmptyNode
