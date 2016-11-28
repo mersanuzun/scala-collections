@@ -46,7 +46,7 @@ class HashMap[K, V] {
     var prev: MapEntry = bucket(index)
     if (currentNode == EmptyMapEntry) return None
     if (currentNode.key == key) {
-      bucket(index) = EmptyMapEntry
+      bucket(index) = bucket(index).next
       return Some(currentNode.value)
     }
     while(currentNode != EmptyMapEntry && currentNode.key != key){
