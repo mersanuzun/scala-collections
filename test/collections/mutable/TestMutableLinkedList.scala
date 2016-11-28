@@ -11,6 +11,7 @@ class TestMutableLinkedList extends Specification{
       val list: LinkedList[Int] = new LinkedList[Int]
       list.addLast(2)
       list.addLast(1)
+      println(list)
       list.firstNode.value mustEqual 2
       list.firstNode.next.value mustEqual(1)
     }
@@ -49,13 +50,12 @@ class TestMutableLinkedList extends Specification{
       list.firstNode.value mustNotEqual 2
     }
 
-    "asdasd" in {
+    "add 1 million value into front" in {
       val list: LinkedList[Int] = new LinkedList[Int]
       for(i <- 1 to 1000000){
         list.addFirst(i)
       }
-      list.foreach(print)
-      "asdasd" equals "asdasd"
+      true
     }
   }
 
