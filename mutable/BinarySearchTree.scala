@@ -8,7 +8,29 @@ import scala.collection.mutable
 class BinarySearchTree[T <% Ordered[T]] {
   private[mutable] var root: Node = EmptyNode
 
-  def add(value: T): Unit = root = root.add(value)
+  def add(value: T): BinarySearchTree[T] = {
+    var curr: Node = root
+    var prev: Node = root
+    if (curr.isEmpty) {
+      root = NonEmptyNode(value, EmptyNode, EmptyNode)
+      return this
+    }
+    while(!curr.isEmpty){
+      if (value < curr.value){
+        prev = curr
+        curr = curr.leftChild
+      }else {
+        prev = curr
+        curr = curr.rightChild
+      }
+    }
+    if (value < prev.value){
+      prev.asInstanceOf[NonEmptyNode].leftChild = NonEmptyNode(value, EmptyNode, EmptyNode)
+    }else {
+      prev.asInstanceOf[NonEmptyNode].rightChild = NonEmptyNode(value, EmptyNode, EmptyNode)
+    }
+    this
+  }
 
   def contains(value: T): Boolean = {
     var curr: Node = root
