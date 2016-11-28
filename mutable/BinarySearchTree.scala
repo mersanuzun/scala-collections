@@ -48,18 +48,11 @@ class BinarySearchTree[T <% Ordered[T]] {
     def value: T
     def leftChild: Node
     def rightChild: Node
-    def add(v: T): Node
     def remove(v: T): Node
     def isEmpty: Boolean
   }
   case class NonEmptyNode(var value: T, var leftChild: Node, var rightChild: Node) extends Node {
-    override def add(v: T): Node = {
-      if (v < value){
-        NonEmptyNode(value, leftChild.add(v), rightChild)
-      }else{
-        NonEmptyNode(value, leftChild, rightChild.add(v))
-      }
-    }
+    
     override def isEmpty: Boolean = false
 
     override def remove(v: T): Node = {
@@ -89,7 +82,6 @@ class BinarySearchTree[T <% Ordered[T]] {
     def leftChild: Node = throw new NoSuchElementException
     def rightChild: Node = throw new NoSuchElementException
     override def toString: String = "-"
-    override def add(v: T): Node = NonEmptyNode(v, EmptyNode, EmptyNode)
     override def isEmpty: Boolean = true
     override def remove(v: T): Node = EmptyNode
   }
